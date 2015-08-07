@@ -1,0 +1,4 @@
+*.pyc
+__pycache__
+static/admin
+static/bower_components

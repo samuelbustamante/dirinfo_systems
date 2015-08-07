@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    {# Metatags #}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %} - Departamento de Informática</title>
+
+    {# Styles #}
+    <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+</head>
+<body>
+    {# Content #}
+    {% block content %}{% endblock %}
+
+    {# Scripts #}
+    <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+</body>
