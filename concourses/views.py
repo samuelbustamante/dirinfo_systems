@@ -23,20 +23,22 @@ class ResultCreateView(CreateView):
             # concurso, ni tampoco a los que salieron ultimamente, con su
             # respectivo número de veces ganadas (count).
             professors = Professor.objects.exclude(
-                pk__in=professors_elected,
+                pk__in=[x.pk for x in professors_elected]
+                ).exclude(
                 area=form.cleaned_data['area']
                 ).annotate(count=Count('professorresult')).order_by('count')
             # Profesores con el menor número de concursos ganados.
-            professors = [x.count for x in professors if (
+            professors = [x for x in professors if (
                 x.count == professors[0].count
                 )]
             # Profesor elegido al azar y guardado en auxiliar.
-            professors_elected.insert(0, random.choice(professor))
+            professors_elected.insert(0, random.choice(professors))
             # Guardar la relación entre Professor y Resultado.
             ProfessorResult.objects.create(
-                professor=professor_elected[0],
+                professor=professors_elected[0],
                 result=result
                 )
+        return super(ResultCreateView, self).form_valid(form)
 
 
 class ResultDetailView(DetailView):

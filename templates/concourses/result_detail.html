@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Detail Concourse{% endblock %}
+
+{% block content %}
+    <p>{{ object.title }}<p>
+    <p>{{ object.area }}<p>
+    <ul>
+        {% for result in object.professors_result.all %}
+            <li>{{ result.professor }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
