@@ -23,6 +23,7 @@ class Professor(models.Model):
 class Result(models.Model):
     title = models.CharField(max_length=100)
     area = models.ForeignKey(Area, related_name='results')
+    date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('result_detail', args=[str(self.id)])
