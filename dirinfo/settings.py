@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'concourses',
     'events',
+    'expedients',
 )
 
 MIDDLEWARE_CLASSES = (
