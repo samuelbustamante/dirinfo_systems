@@ -1,3 +1,13 @@
-from django.contrib import admin
+# -*- coding: utf-8 -*-
 
-# Register your models here.
+from django.contrib import admin
+from expedients.models import Expedient, Dispatch
+
+
+class DispatchInline(admin.TabularInline):
+    model = Dispatch
+
+
+@admin.register(Expedient)
+class ExpedientAdmin(admin.ModelAdmin):
+    inlines = [DispatchInline]

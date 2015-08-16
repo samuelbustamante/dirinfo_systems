@@ -15,27 +15,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Dispatch',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
+                ('received', models.BooleanField(default=False)),
             ],
         ),
         migrations.CreateModel(
             name='Expedient',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=100)),
                 ('number', models.CharField(max_length=20)),
             ],
             options={
-                'verbose_name': 'expediente',
                 'verbose_name_plural': 'expedientes',
+                'verbose_name': 'expediente',
             },
         ),
         migrations.AddField(
             model_name='dispatch',
             name='expedient',
-            field=models.ForeignKey(related_name='dispatchs', to='expedients.Expedient'),
+            field=models.ForeignKey(to='expedients.Expedient', related_name='dispatchs'),
         ),
         migrations.AddField(
             model_name='dispatch',

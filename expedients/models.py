@@ -14,6 +14,7 @@ class Expedient(models.Model):
     class Meta:
         verbose_name = 'expediente'
         verbose_name_plural = 'expedientes'
+        ordering = ['-dispatchs']
 
 
 class Dispatch(models.Model):
@@ -21,3 +22,4 @@ class Dispatch(models.Model):
     expedient = models.ForeignKey(Expedient, related_name='dispatchs')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    received = models.BooleanField(default=False)

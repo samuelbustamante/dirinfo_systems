@@ -8,9 +8,12 @@ class ExpedientListView(ListView):
     model = Expedient
 
     def get_queryset(self):
-        # Los expedientes donde el último dispatch
+        # Los expedientes donde el último despacho
         # tenga como user a request.user
-
+        return self.model.objects.filter(
+            dispatchs__user=self.request.user,
+            dispatchs__in=Dispatch.objects.all().distinct('expedient')
+            )
 
 
 class ExpedientCreateView(CreateView):
