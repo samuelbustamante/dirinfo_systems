@@ -14,7 +14,6 @@ class Expedient(models.Model):
     class Meta:
         verbose_name = 'expediente'
         verbose_name_plural = 'expedientes'
-        ordering = ['-dispatchs']
 
 
 class Dispatch(models.Model):

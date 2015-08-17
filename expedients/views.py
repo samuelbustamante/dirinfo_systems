@@ -13,7 +13,7 @@ class ExpedientListView(ListView):
         return self.model.objects.filter(
             dispatchs__user=self.request.user,
             dispatchs__in=Dispatch.objects.all().distinct('expedient')
-            )
+            ).order_by('dispatchs')
 
 
 class ExpedientCreateView(CreateView):
