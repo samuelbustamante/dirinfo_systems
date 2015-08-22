@@ -1,14 +1,31 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import (
+    ListView, CreateView, DetailView, DeleteView
+    )
 from concourses.models import Professor, Result, ProfessorResult
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
 import random
+
+
+class ResultListView(ListView):
+    model = Result
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResultListView, self).dispatch(*args, **kwargs)
 
 
 class ResultCreateView(CreateView):
     model = Result
     fields = ['title', 'area']
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResultCreateView, self).dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         # Objeto Result
@@ -44,6 +61,15 @@ class ResultCreateView(CreateView):
 class ResultDetailView(DetailView):
     model = Result
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResultDetailView, self).dispatch(*args, **kwargs)
 
-class ResultListView(ListView):
+
+class ResultDeleteView(DeleteView):
     model = Result
+    success_url = reverse_lazy('concourses:list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ResultDeleteView, self).dispatch(*args, **kwargs)

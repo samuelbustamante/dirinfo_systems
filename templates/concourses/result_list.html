@@ -2,19 +2,41 @@
 
 {% load bootstrap3 %}
 
-{% block title %}List of concourses{% endblock %}
+{% block title %}Concourses{% endblock %}
 
 {% block content %}
     <div class="page-header">
-    	<h2>List of concourses</h2>
+    	<h2>Concourses <a href="{% url 'concourses:create' %}" class="btn btn-success pull-right" title="Create">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+        </h2>
     </div>
-    <ul class="list-unstyled">
-        {% for object in object_list %}
-            <li>
-                <a href="{% url "result_detail" object.pk %}">{{ object.title }}</a>
-            </li>
-        {% empty %}
-            <li>No concourses.</li>
-        {% endfor %}
-    </ul>
+    <table class="table">
+    	<thead>
+    		<tr>
+                <th>Title</th>
+                <th>Area</th>
+    			<th></th>
+    		</tr>
+    	</thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>
+                        <a href="{% url "concourses:detail" object.pk %}">{{ object.title }}</a>
+                    </td>
+                    <td>{{ object.area }}</td>
+                    <td class="text-right">
+                        <a href="{% url 'concourses:delete' object.pk %}" class="btn btn-sm btn-danger" title="Delete">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No concourses.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
