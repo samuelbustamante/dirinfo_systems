@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from expedients.models import Expedient, Dispatch
+from django.core.urlresolvers import reverse
+
+
+class ExpedientCreateView(CreateView):
+    model = Expedient
+    fields = ['name', 'number']
+
+    def get_success_url(self):
+        return reverse('expedients:detail', kwargs={'pk': self.object.pk})
 
 
 class ExpedientListView(ListView):
@@ -16,6 +25,5 @@ class ExpedientListView(ListView):
             ).order_by('dispatchs')
 
 
-class ExpedientCreateView(CreateView):
+class ExpedientDetailView(DetailView):
     model = Expedient
-    fields = ['name', 'number']

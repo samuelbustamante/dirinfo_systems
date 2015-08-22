@@ -2,14 +2,19 @@
 
 {% load bootstrap3 %}
 
-{% block title %}List Concourse{% endblock %}
+{% block title %}List of concourses{% endblock %}
 
 {% block content %}
-    <ul>
+    <div class="page-header">
+    	<h2>List of concourses</h2>
+    </div>
+    <ul class="list-unstyled">
         {% for object in object_list %}
             <li>
                 <a href="{% url "result_detail" object.pk %}">{{ object.title }}</a>
             </li>
+        {% empty %}
+            <li>No concourses.</li>
         {% endfor %}
     </ul>
 {% endblock %}

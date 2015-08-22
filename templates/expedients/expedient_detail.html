@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Detail Expedient{% endblock %}
+
+{% block content %}
+    <p>{{ object.name }}<p>
+    <p>{{ object.number }}<p>
+    <ul>
+        {% for dispatch in object.dispatchs.all %}
+            <li>{{ dispatch }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

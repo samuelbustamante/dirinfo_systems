@@ -2,15 +2,15 @@
 
 {% load bootstrap3 %}
 
-{% block title %}Create concourse{% endblock %}
+{% block title %}Delete event{% endblock %}
 
 {% block content %}
     <div class="page-header">
-    	<h2>Create concourse</h2>
+    	<h2>Delete event</h2>
     </div>
     <form method="post" action=".">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">Create</button>
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 {% endblock %}
