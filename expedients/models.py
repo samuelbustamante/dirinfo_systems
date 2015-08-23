@@ -9,7 +9,7 @@ class Expedient(models.Model):
     number = models.CharField(max_length=20)
 
     def __str__(self):
-        return '{} - {}'.format(self.name, self.number)
+        return '{} {}'.format(self.name, self.number)
 
     class Meta:
         verbose_name = 'expediente'

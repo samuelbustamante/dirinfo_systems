@@ -5,11 +5,24 @@
 {% block title %}Detail Expedient{% endblock %}
 
 {% block content %}
-    <p>{{ object.name }}<p>
-    <p>{{ object.number }}<p>
-    <ul>
+    <div class="page-header">
+        <div class="row">
+            <h2 class="col-sm-6">Expedient {{ object }}</h2>
+            <h2 class="col-sm-6 text-right">
+                <a class="btn btn-sm btn-primary" href="{% url "expedients:dispatch" object.pk %}" title="Dispatch">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                </a>
+                <a class="btn btn-sm btn-danger" href="{% url "expedients:delete" object.pk %}" title="Delete">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+            </h2>
+        </div>
+    </div>
+    <ul class="list-unstyled">
         {% for dispatch in object.dispatchs.all %}
             <li>{{ dispatch }}</li>
+        {% empty %}
+            <li>No dispatchs.</li>
         {% endfor %}
     </ul>
 {% endblock %}

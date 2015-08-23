@@ -2,21 +2,63 @@
 
 {% load bootstrap3 %}
 
-{% block title %}List Expedient{% endblock %}
+{% block title %}Expedient list{% endblock %}
 
 {% block content %}
-    <ul>
-        {% for object in object_list %}
-            <li>
-                <div>Pk: {{ object.pk }}</div>
-                <ul>
-                    {% for dispatch in object.dispatchs.all %}
-                    	<li>
-                            <div>Pk: {{ dispatch.pk }} ({{ dispatch.user }})</div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="page-header">
+        <div class="row">
+            <h2 class="col-sm-6">Expedients</h2>
+            <h2 class="col-sm-6 text-right">
+                <a href="{% url 'expedients:create' %}" class="btn btn-success pull-right" title="Create">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+            </h2>
+        </div>
+    </div>
+    <table class="table table-hover">
+    	<thead>
+    		<tr>
+    			<th>Expedient</th>
+                <th>Dispatch</th>
+                <th>Acepted</th>
+                <th></th>
+    		</tr>
+    	</thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    {# Expedient #}
+                    <td>
+                        <a href="{% url "expedients:detail" object.pk %}">{{ object }}</a>
+                    </td>
+
+                    {# Dispatch #}
+                    {% with dispatch=object.dispatchs.all.last.user %}
+                        {% if dispatch %}
+                            <td>{{ object.dispatchs.all.last.user }}</td>
+                        {% else %}
+                            <td>No dispatched</td>
+                        {% endif %}
+                    {% endwith %}
+
+                    {# Acepted #}
+                    <td></td>
+
+                    {# Options #}
+                    <td class="text-right">
+                        <a class="btn btn-xs btn-primary" href="{% url "expedients:dispatch" object.pk %}" title="Dispatch">
+                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-xs btn-danger" href="{% url "expedients:delete" object.pk %}" title="Delete">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                	<td colspan="4">No expedients.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
