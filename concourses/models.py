@@ -2,7 +2,6 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 
 
 class Area(models.Model):
@@ -24,9 +23,6 @@ class Result(models.Model):
     title = models.CharField(max_length=100)
     area = models.ForeignKey(Area, related_name='results')
     date = models.DateTimeField(auto_now_add=True)
-
-    def get_absolute_url(self):
-        return reverse('concourses:detail', args=[str(self.id)])
 
     def __str__(self):
         return self.title

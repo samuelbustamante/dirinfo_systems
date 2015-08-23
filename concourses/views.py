@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import (
-    ListView, CreateView, DetailView, DeleteView
-    )
+from django.views.generic import ListView, CreateView, DeleteView
 from concourses.models import Professor, Result, ProfessorResult
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -22,6 +20,7 @@ class ResultListView(ListView):
 class ResultCreateView(CreateView):
     model = Result
     fields = ['title', 'area']
+    success_url = reverse_lazy('concourses:list')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -56,14 +55,6 @@ class ResultCreateView(CreateView):
                 result=result
                 )
         return super(ResultCreateView, self).form_valid(form)
-
-
-class ResultDetailView(DetailView):
-    model = Result
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ResultDetailView, self).dispatch(*args, **kwargs)
 
 
 class ResultDeleteView(DeleteView):

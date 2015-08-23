@@ -6,26 +6,39 @@
 
 {% block content %}
     <div class="page-header">
-    	<h2>Concourses <a href="{% url 'concourses:create' %}" class="btn btn-success pull-right" title="Create">
+        <h2>Concourses <a href="{% url 'concourses:create' %}" class="btn btn-success pull-right" title="Create">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
         </h2>
     </div>
     <table class="table">
-    	<thead>
-    		<tr>
+        <thead>
+            <tr>
                 <th>Title</th>
                 <th>Area</th>
-    			<th></th>
-    		</tr>
-    	</thead>
+                <th>Titulares</th>
+                <th>Suplentes</th>
+                <th></th>
+            </tr>
+        </thead>
         <tbody>
             {% for object in object_list %}
                 <tr>
-                    <td>
-                        <a href="{% url "concourses:detail" object.pk %}">{{ object.title }}</a>
-                    </td>
+                    <td>{{ object.title }}</td>
                     <td>{{ object.area }}</td>
+                    <td>
+                        <ol>
+                        {% for result in object.professors_result.all %}
+                            {% if not forloop.first and forloop.counter0|divisibleby:"3" %}
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                            {% endif %}
+                            <li>{{ result.professor }}</li>
+                        {% endfor %}
+                        </ol>
+                    </td>
                     <td class="text-right">
                         <a href="{% url 'concourses:delete' object.pk %}" class="btn btn-sm btn-danger" title="Delete">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
