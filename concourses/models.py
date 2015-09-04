@@ -10,6 +10,9 @@ class Area(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Professor(models.Model):
     user = models.OneToOneField(User, primary_key=True)
@@ -26,6 +29,9 @@ class Result(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-date']
 
 
 class ProfessorResult(models.Model):

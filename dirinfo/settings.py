@@ -116,6 +116,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = 'http://media.dirinfo.unsl.edu.ar/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 # Authentication backends
 # https://docs.djangoproject.com/en/1.8/topics/auth/customizing/#authentication-backends
 
