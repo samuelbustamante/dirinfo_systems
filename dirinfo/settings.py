@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'concourses',
     'events',
     'expedients',
-    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
